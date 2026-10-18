@@ -34,11 +34,18 @@ class ChallengeHeaderMiddleware:
         finally:
             request_challenge.reset(token)
 
-
 mcp = FastMCP(
     "Exam Challenge Server",
     stateless_http=True,
     json_response=True,
+    transport_security=TransportSecuritySettings(
+        enable_dns_rebinding_protection=True,
+        allowed_hosts=[
+            "your-service.onrender.com",
+            "localhost:*",
+            "127.0.0.1:*",
+        ],
+    ),
 )
 
 
